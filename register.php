@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $name=$data-> name;
 $email=$data-> email;
-$password=$data -> password_hash($data->password, PASSWORD_DEFAULT);
+$password= password_hash($data->password, PASSWORD_DEFAULT);
 
 try {
     $sql= "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
