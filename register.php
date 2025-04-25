@@ -10,4 +10,6 @@ try {
     $sql= "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
     $stmt= $pdo->prepare ($sql);
     $stmt->execute ([$name, $email, $password]);
+    
+    echo json_encode (["message" => "Regested success"]);
 }
