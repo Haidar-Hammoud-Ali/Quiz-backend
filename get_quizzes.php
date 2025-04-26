@@ -5,5 +5,7 @@ try{
     $sql = "SELECT * FROM quizzes";
     $stmt = $pdo->query($sql);
     $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
 }
 ?>
