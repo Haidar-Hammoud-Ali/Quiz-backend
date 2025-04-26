@@ -9,5 +9,7 @@ $quiz_id = $data->quiz_id;
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$quiz_id]);
     echo json_encode(["message" => "Quiz deleted"]);
- }
+ }catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
+}
 ?>
