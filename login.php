@@ -10,8 +10,10 @@ try{
     $stmt= $pdo ->prepare ($sql);
     $stmt -> execute ([$email]);
     $user= $stmt ->fetch (PDO::FETCH_ASSOC);
-
-
-
+    if ($user && password_verify($password, $user['password'])){
+        echo json_encode(["message" => "Login successful"]);
+    } else {
+        echo json_encode(["error" => "Invalid email or password"]);
+    }
 }
 ?>
