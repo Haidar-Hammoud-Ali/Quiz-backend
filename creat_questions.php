@@ -12,5 +12,8 @@ try {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$quiz_id, $question_text, $correct_answer]);
     echo json_encode(["message" => "Question added"]);
+    
+}catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
 }
 ?>
