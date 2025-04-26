@@ -15,5 +15,7 @@ try{
     } else {
         echo json_encode(["error" => "Invalid email or password"]);
     }
+}catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
 }
 ?>
