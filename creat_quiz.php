@@ -11,5 +11,7 @@ try {
     $stmt->execute([$title, $user_id]);
 
     echo json_encode(["message" => "Quiz created"]);
-} 
+} catch (PDOException $e) {
+    echo json_encode(["error" => $e->getMessage()]);
+}
 ?>
