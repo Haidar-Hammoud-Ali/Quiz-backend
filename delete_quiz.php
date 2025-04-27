@@ -1,15 +1,14 @@
 <?php
 require_once 'config/database.php';
 
-$data = json_decode(file_get_contents("php://input"));
+$userdata = file_get_contents("php://input");
+$userdata = json_decode($userdata);
 
-$quiz_id = $data->quiz_id;
- try {
-    $sql = "DELETE FROM quizzes WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$quiz_id]);
-    echo json_encode(["message" => "Quiz deleted"]);
- }catch (PDOException $e) {
-    echo json_encode(["error" => $e->getMessage()]);
-}
+$quizid = $userdata->quizid;
+
+$deletquiz = "DELETE FROM quizzes WHERE id = ?";
+$statmnt = $pdo->prepare($deletquiz);
+$statmnt->execute([$quizid]);
+echo json_encode(["message" => "Quiz was deleted successfully"]);
+
 ?>
