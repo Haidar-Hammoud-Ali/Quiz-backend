@@ -2,9 +2,11 @@
 require_once 'config/database.php';
 
 try{
-    $sql = "SELECT * FROM quizzes";
-    $stmt = $pdo->query($sql);
-    $quizzes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $getallquiz = "SELECT * FROM quizzes";
+    $statmnt = $pdo->query($getallquiz);
+    $quizzes = $statmnt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode(["message" => "All Quizzes List"]);
 }catch (PDOException $e) {
     echo json_encode(["error" => $e->getMessage()]);
 }
