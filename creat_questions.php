@@ -1,19 +1,17 @@
 <?php
-require_once 'config/database.php'
+require_once 'config/database.php';
 
-$data = json_decode(file_get_contents("php://input"));
+$userdata = file_get_contents("php://input");
+$userdata = json_decode($userdata);
 
-$quiz_id = $data->quiz_id;
-$question_text = $data->question_text;
-$correct_answer = $data->correct_answer;
+$quizid = $data->quizid;
+$questiontext = $data->questiontext;
+$correctanswer = $data->correctanswer;
 
-try {
-    $sql= "INSERT INTO questions (quiz_id, question_text, correct_answer) VALUES (?, ?, ?)"
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$quiz_id, $question_text, $correct_answer]);
-    echo json_encode(["message" => "Question added"]);
+
+$sql= "INSERT INTO questions (quizid, questiontext, correctanswer) VALUES (?, ?, ?)";
+$statmnt = $pdo->prepare($sql);
+$statmnt->execute([$quizid, $questiontext, $correctanswer]);
+echo json_encode(["message" => "Question added"]);
     
-}catch (PDOException $e) {
-    echo json_encode(["error" => $e->getMessage()]);
-}
 ?>
