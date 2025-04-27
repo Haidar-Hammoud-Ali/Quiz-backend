@@ -7,5 +7,8 @@ $userdata = json_decode($userdata);
 $questionid=$userdata->questionid;
 
 $deletquestion= "DELETE FROM questions where id = ?";
-$
+$statmnt= $pdo ->prepare ("$deletquestion");
+$statmnt->execute([$questionid]);
+
+
 ?>
