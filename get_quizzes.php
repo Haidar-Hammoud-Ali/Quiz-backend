@@ -6,7 +6,7 @@ try{
     $statmnt = $pdo->query($getallquiz);
     $quizzes = $statmnt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(["message" => "All Quizzes List"]);
+    echo json_encode($quizzes);
 }catch (PDOException $e) {
     echo json_encode(["error" => $e->getMessage()]);
 }

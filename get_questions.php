@@ -1,18 +1,15 @@
 <?php
-require_once 'config/database.php'
+require_once 'config/database.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
 $quiz_id = $data->quiz_id;
-try {
-    $sql = "SELECT * FROM questions WHERE quiz_id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$quiz_id]);
-    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode($questions);
+$getq = "SELECT * FROM questions WHERE quizid = ?";
+$statmnt = $pdo->prepare($getq);
+$statmnt->execute([$quizid]);
+$questions = $statmnt->fetchAll(PDO::FETCH_ASSOC);
 
-    } catch (PDOException $e) {
-        echo json_encode(["error" => $e->getMessage()]);
-    }
+echo json_encode($questions);
+
 ?>
