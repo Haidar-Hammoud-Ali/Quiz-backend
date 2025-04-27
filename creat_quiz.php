@@ -1,13 +1,15 @@
 <?php
 require_once 'config/database.php';
 
-$data = json_decode(file_get_contents("php://input"));
-$title = $data->title;
-$user_id = $data->user_id;
+$userdata = file_get_contents("php://input");
+$userdata= json_decode($userdata);
+$quiztitle = $data->title;
+$quizuser_id = $data->user_id;
 
-$sql = "INSERT INTO quizzes (title, user_id) VALUES (?, ?)";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$title, $user_id]);
+$myQuery="INSERT INTO quizzes (title, user_id) VALUES (?, ?) ";
 
-echo json_encode(["message" => "Quiz created"]);
+$statmnt = $pdo->prepare($myQuery);
+$statmnt->execute([$quiztitle, $quizuser_id]);
+
+echo json_encode(["message" => "Your Quiz Created"]);
 ?>
